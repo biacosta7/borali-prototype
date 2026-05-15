@@ -1,0 +1,59 @@
+<div class="map-page">
+  <div class="map-page-header">
+    <span class="map-eyebrow">Localização</span>
+    <h1 class="map-main-heading">MAPA <em>CULTURAL</em></h1>
+  </div>
+
+  <div class="proximity-bar">
+    <div class="proximity-input-wrap">
+      <input type="text" placeholder="Buscar por bairro ou proximidade (ex: 5km)..." class="proximity-input">
+      <button class="btn-location" (click)="svc.showToast('Usando sua localização...')">
+        📍 Usar minha localização
+      </button>
+    </div>
+  </div>
+
+  <div class="map-canvas">
+    <div class="map-dots-bg"></div>
+
+    <div class="map-marker" *ngFor="let m of svc.mapMarkers"
+         [style.top]="m.top" [style.left]="m.left"
+         (click)="svc.openModal(m.eventKey)">
+      <div class="marker-dot" [ngClass]="m.pinClass"></div>
+      <div class="marker-label">{{ m.label }}</div>
+    </div>
+
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#aaa;pointer-events:none;">
+      <div style="font-size:40px;margin-bottom:8px;">🗺</div>
+      <div style="font-size:13px;font-weight:600;">Google Maps seria integrado aqui</div>
+      <div style="font-size:11px;opacity:.6;">Clique nos pins para ver os eventos</div>
+    </div>
+
+    <div class="map-legend">
+      <div class="legend-title">Categorias</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#E8431A"></div>Música</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#C8A96E"></div>Arte</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2A5CFF"></div>Teatro</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#00BA71"></div>Dança</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#A35CFF"></div>Cinema</div>
+    </div>
+  </div>
+
+  <div class="nearby-title-row">
+    <div>
+      <span class="section-eyebrow" style="margin-bottom:4px;">Geolocalização</span>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:28px;">EVENTOS PRÓXIMOS DE VOCÊ</h3>
+    </div>
+  </div>
+
+  <div class="nearby-list">
+    <div class="nearby-card" *ngFor="let item of svc.nearbyEvents" (click)="svc.openModal(item.eventKey)">
+      <div class="nearby-icon" [style.background]="item.iconBg">{{ item.icon }}</div>
+      <div class="nearby-info">
+        <div class="nearby-name">{{ item.name }}</div>
+        <div class="nearby-sub">{{ item.sub }}</div>
+      </div>
+      <div class="dist-badge">{{ item.distance }}</div>
+    </div>
+  </div>
+</div>

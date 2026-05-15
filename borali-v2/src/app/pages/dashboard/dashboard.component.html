@@ -1,0 +1,70 @@
+<div class="dash-page">
+  <div class="dash-header">
+    <div>
+      <span class="section-eyebrow">Seu Painel</span>
+      <h1 class="dash-title">DASHBOARD <em>PESSOAL</em></h1>
+    </div>
+    <button class="btn-criar-evento" (click)="svc.showPage('criar')">+ Criar Evento</button>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card" *ngFor="let m of metricas">
+      <span class="m-label">{{ m.label }}</span>
+      <span class="m-value">{{ m.value }}</span>
+      <p class="m-sub">{{ m.sub }}</p>
+    </div>
+  </div>
+
+  <div class="platform-stats">
+    <h3 class="stats-heading">MÉTRICAS DA PLATAFORMA</h3>
+    <div class="metrics-grid mini">
+      <div class="metric-card dark">
+        <span class="m-label">Total de Eventos</span>
+        <span class="m-value neutral">47</span>
+        <p class="m-sub pos">↑ +8 esta semana</p>
+      </div>
+      <div class="metric-card dark">
+        <span class="m-label">Usuários Ativos</span>
+        <span class="m-value neutral">1.284</span>
+        <p class="m-sub pos">↑ +12% vs mês anterior</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-box">
+      <h3 class="stats-heading">EVENTOS POR CATEGORIA</h3>
+      <div class="bar-chart-v">
+        <div class="bar-item" *ngFor="let bar of barData">
+          <span>{{ bar.label }}</span>
+          <div class="bar-track">
+            <div class="bar-fill" [style.width]="bar.pct" [style.background]="bar.color"></div>
+          </div>
+          <span>{{ bar.count }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3 class="stats-heading">ATIVIDADE (5 SEMANAS)</h3>
+      <div class="hm-header">
+        <div class="hm-day" *ngFor="let d of weekDays">{{ d }}</div>
+      </div>
+      <div class="heatmap-grid">
+        <div class="hm-cell" *ngFor="let v of heatmapData"
+             [style.background]="cellBg(v)"
+             [style.border]="'1px solid ' + cellBorder(v)"
+             [title]="v + (v === 1 ? ' evento' : ' eventos')">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="stats-heading" style="margin-top:40px;">MODELOS DE ML — DESEMPENHO</h3>
+  <div class="ml-metrics">
+    <div class="ml-card" *ngFor="let ml of mlData">
+      <span class="ml-val" [style.color]="ml.color">{{ ml.val }}</span>
+      <span class="ml-lbl">{{ ml.label }}</span>
+    </div>
+  </div>
+</div>

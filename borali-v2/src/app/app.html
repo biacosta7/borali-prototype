@@ -1,0 +1,54 @@
+<!-- CURSOR -->
+<div class="cursor" [style.left.px]="cursorX" [style.top.px]="cursorY" [class.cursor-hover]="cursorHover"></div>
+<div class="cursor-ring" [style.left.px]="ringX" [style.top.px]="ringY" [class.cursor-hover]="cursorHover"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-bg"></div>
+  <div class="nav-logo" (click)="showPage('home')">BOR<span>ALI</span></div>
+  <ul class="nav-links">
+    <li><a (click)="showPage('home')"   [class.active]="page==='home'">Eventos</a></li>
+    <li><a (click)="showPage('mapa')"   [class.active]="page==='mapa'">Mapa</a></li>
+    <li><a (click)="showPage('agenda')" [class.active]="page==='agenda'">Agenda</a></li>
+    <li><a (click)="showPage('dash')"   [class.active]="page==='dash'">Dashboard</a></li>
+    <li><a (click)="showPage('perfil')" [class.active]="page==='perfil'">Perfil</a></li>
+    <li><a (click)="showPage('criar')"  class="nav-cta">+ Criar Evento</a></li>
+  </ul>
+</nav>
+
+<!-- PÁGINAS -->
+<main [class.map-bg]="page === 'mapa'">
+  <app-home      *ngIf="page === 'home'"   />
+  <app-mapa      *ngIf="page === 'mapa'"   />
+  <app-agenda    *ngIf="page === 'agenda'" />
+  <app-criar     *ngIf="page === 'criar'"  />
+  <app-dashboard *ngIf="page === 'dash'"   />
+  <app-perfil    *ngIf="page === 'perfil'" />
+</main>
+
+<!-- MODAL GLOBAL -->
+<div class="modal-overlay" [class.open]="modalOpen" (click)="onOverlayClick($event)">
+  <div class="modal-card" *ngIf="modalEvent">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+    <div class="modal-header-img" [style.background]="modalEvent.bg">
+      <div class="modal-icon">{{ modalEvent.icon }}</div>
+    </div>
+    <div class="modal-body">
+      <h2>{{ modalEvent.title }}</h2>
+      <p>{{ modalEvent.sub }}</p>
+      <div class="modal-details-list">
+        <div class="m-detail"><span>📅</span><p>{{ modalEvent.date }}</p></div>
+        <div class="m-detail"><span>📍</span><p>{{ modalEvent.loc }}</p></div>
+        <div class="m-detail"><span>🎟</span><p>{{ modalEvent.price }}</p></div>
+        <div class="m-detail"><span>👤</span><p>{{ modalEvent.intCount }}</p></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-orange-full" (click)="addToAgenda()">Tenho Interesse</button>
+        <button class="btn-modal-close" (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" [class.show]="toastVisible">{{ toastMsg }}</div>

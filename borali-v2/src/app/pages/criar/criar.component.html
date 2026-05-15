@@ -1,0 +1,55 @@
+<div class="criar-page">
+  <div class="criar-inner">
+    <div class="criar-header">
+      <span class="section-eyebrow">Organizador</span>
+      <h1>CADASTRAR <em>EVENTO</em></h1>
+      <p>Preencha os dados abaixo para publicar seu evento na plataforma.</p>
+    </div>
+
+    <div class="create-event-form">
+      <div class="form-grid">
+        <div class="f-group full">
+          <label>Nome do Evento</label>
+          <input type="text" [(ngModel)]="form.nome" placeholder="Ex: Festival de Jazz do Recife Antigo">
+        </div>
+        <div class="f-group">
+          <label>Data</label>
+          <input type="date" [(ngModel)]="form.data">
+        </div>
+        <div class="f-group">
+          <label>Horário</label>
+          <input type="time" [(ngModel)]="form.hora">
+        </div>
+        <div class="f-group">
+          <label>Categoria</label>
+          <select [(ngModel)]="form.categoria">
+            <option>Música</option>
+            <option>Teatro</option>
+            <option>Artes Visuais</option>
+            <option>Cinema</option>
+            <option>Dança</option>
+            <option>Literatura</option>
+            <option>Gastronomia</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Preço (R$)</label>
+          <input type="text" [(ngModel)]="form.preco" placeholder="0,00 — deixe 0 para gratuito">
+        </div>
+        <div class="f-group full">
+          <label>Localização</label>
+          <input type="text" [(ngModel)]="form.local" placeholder="Ex: Praça do Arsenal, Recife Antigo">
+        </div>
+        <div class="f-group full">
+          <label>Descrição do Evento</label>
+          <textarea [(ngModel)]="form.descricao" placeholder="Descreva as atrações, informações importantes, acessibilidade..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-form-submit" (click)="publicar()">Publicar Evento</button>
+        <button type="button" class="btn-form-cancel" (click)="svc.showPage('dash')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
